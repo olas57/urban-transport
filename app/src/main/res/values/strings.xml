@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Билеты городского транспорта</string>
+    <string name="msg_nfccap">Поддержка NFC</string>
+    <string name="msg_nfcon">Включить NFC</string>
+    <string name="msg_nfccon">Включить NFC</string>
+</resources>

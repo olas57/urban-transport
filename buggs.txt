@@ -1,0 +1,2 @@
+1)
+  Check NFC Support app crash

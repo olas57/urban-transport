@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style type="text/css">
+	    html
+	    {
+	    	font-size: 75%; // 12px
+	    }
+	    @media only screen and (max-device-width: 2560px)
+		{
+			html
+			{
+				font-size: 300%; // px
+			}
+		}
+		@media only screen and (max-device-width: 1920px)
+		{
+			html
+			{
+				font-size: 200%; // px
+			}
+		}
+		@media only screen and (max-device-width: 1440px)
+		{
+			html
+			{
+				font-size: 175%; // px
+			}
+		}
+
+		@media only screen and (max-device-width: 1200px)
+		{
+			html
+			{
+				font-size: 150%; // px
+			}
+		}
+		@media only screen and (max-device-width: 1080px)
+		{
+			html
+			{
+				font-size: 140%; // px
+			}
+		}
+		@media only screen and (max-device-width: 768px)
+		{
+			html
+			{
+				font-size: 135%; // px
+			}
+		}
+		@media only screen and (max-device-width: 720px)
+		{
+			html
+			{
+				font-size: 130%; // px
+			}
+		}
+		@media only screen and (max-device-width: 480px)
+		{
+			html
+			{
+				font-size: 100%; // px
+			}
+		}
+
+
+		.upper, .middle, .lower
+		{
+  			position: absolute;
+  			left: 0;
+  			right: 0;
+		}
+	.upper
+	{
+  		background: url("file:///android_asset/images/single.png") no-repeat;
+  		top: 0;
+  		height: 33.3%;
+  		background-color: red;
+  		overflow:scroll;
+  		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+ 	}
+ 	.middle
+	{
+  		background: url("file:///android_asset/images/single90.png") no-repeat;
+  		top: 33.3%;
+  		height: 33.3%;
+  		background-color: white;
+  		overflow:scroll;
+  		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+ 	}
+	.lower
+	{
+  		background: url("file:///android_asset/images/tat.png") no-repeat;
+  		bottom: 0;
+  		height: 33.3%;
+  		background-color: blue;
+  		overflow:scroll;
+  		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	div
+	{
+		text-align: center;
+		white-space: pre-wrap;
+	}
+	a
+	{
+		text-decoration: none;
+	}
+</style>
+</head>
+<body>
+<div class="upper">
+	<script type="text/javascript">
+		function funcsingle()
+		{
+	 		if(app.Tickettype() == 1)
+				document.write(app.makeDisp());
+			else
+				document.write("");
+			}
+			window.onload = funcsingle();
+	</script>
+</div>
+<div class="middle">
+	<script type="text/javascript">
+		function funcsingle90()
+		{
+			if(app.Tickettype() == 2)
+				document.write(app.makeDisp());
+			else
+				document.write("");
+		}
+		window.onload =  funcsingle90();
+	</script>
+</div>
+<div class="lower">
+	<script type="text/javascript">
+		function functat()
+		{
+			if(app.Tickettype() == 3)
+				document.write(app.makeDisp());
+			else
+				document.write("");
+		}
+		window.onload = functat();
+		</script>
+</div>
+</body>
+</html>
