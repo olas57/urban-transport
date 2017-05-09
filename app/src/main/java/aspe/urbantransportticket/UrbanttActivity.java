@@ -48,6 +48,7 @@ public class UrbanttActivity extends AppCompatActivity
     private String mCardLastTransferUlt = "";
     private String mCardRemMinUlt90 = "";
     private String mCardRemMinUltSingle = "";
+    private String mCardRemFixedDays = "";
     private String mListStrTech = "";
     private String mType = "";
     private String mListStrUid = "";
@@ -330,6 +331,12 @@ public class UrbanttActivity extends AppCompatActivity
             mTick.append(mCardRemMinUltSingle);
             mTick.append("\r\n");
         }
+        if(mTickId == 419)
+        {
+            mTick.append("Осталось часов/минут: ");
+            mTick.append(mCardRemFixedDays);
+            mTick.append("\r\n");
+        }
         ////////////////////////////////////////////////////////
         // Last Turnstile
         mTick.append("Последний валидатор: ");
@@ -462,6 +469,10 @@ public class UrbanttActivity extends AppCompatActivity
 
                 mMfUlTester.GetValPer();
                 mTickValPerUlt = mMfUlTester.mTickValPer;
+
+                mMfUlTester.GetTicketRemFixedDays();
+                mCardRemFixedDays = mMfUlTester.mCardRemFixedDay;
+                ////////////////////////////////////////
 
                 mMfUlTester.GetTicketLastPass();
                 mTickLastPassUlt = mMfUlTester.mTickLastPass;
