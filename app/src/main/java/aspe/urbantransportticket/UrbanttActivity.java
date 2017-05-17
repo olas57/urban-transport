@@ -29,6 +29,7 @@ public class UrbanttActivity extends AppCompatActivity
     private MifareUltralightTagTester mMfUlTester = null;
     private String mNfcA = "android.nfc.tech.NfcA";
     private String mMifareUltralight = "android.nfc.tech.MifareUltralight";
+    private String mNdef = "android.nfc.tech.Ndef";
     /////////////////////////////////////////////////////
     public NfcA mnfcA = null;
     /////////////////////////////////////////////////////
@@ -249,11 +250,14 @@ public class UrbanttActivity extends AppCompatActivity
                 {
                     ReadUltralight();
                 }
+                else if(mNdef.equals(t))
+                {
+                    ReadUltralight();
+                }
                 else
                 {
                     ReadUltralight();
                 }
-                displayMifareUltralightData();
             }
         }
     }
@@ -422,94 +426,101 @@ public class UrbanttActivity extends AppCompatActivity
         mMfUlTester = new MifareUltralightTagTester();
         mMfUlTester.Init();
         Utils.Tech();
-
-        mnfcA =  NfcA.get(tagFromIntent);
-
-        if (mMfUlTester != null)
+        ////////////////////////////////////////////////
+        if (mType == "NFC_TAG_TYPE_2")
         {
-            try
+            // read TAG ???
+            Toast.makeText(this, "Не удается прочитать карту", Toast.LENGTH_SHORT).show();
+            ////////////////////////////////////////////
+        }
+        else
+        {
+            mnfcA = NfcA.get(tagFromIntent);
+
+            if (mMfUlTester != null)
             {
-                mnfcA.connect();
-                mnfcA.setTimeout(2000);
-                //  Page 0
-                mMfUlTester.responseAPDU_0_15 = mnfcA.transceive(mMfUlTester.Bytes_0_15);
-                mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_0_15;
-                //  Page 4
-                mMfUlTester.responseAPDU_16_31 = mnfcA.transceive(mMfUlTester.Bytes_16_31);
-                mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_16_31;
+                try
+                {
+                    mnfcA.connect();
+                    mnfcA.setTimeout(2000);
+                    //  Page 0
+                    mMfUlTester.responseAPDU_0_15 = mnfcA.transceive(mMfUlTester.Bytes_0_15);
+                    mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_0_15;
+                    //  Page 4
+                    mMfUlTester.responseAPDU_16_31 = mnfcA.transceive(mMfUlTester.Bytes_16_31);
+                    mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_16_31;
 
-                mMfUlTester.GetAppId();
-                //mTickAppIdUlt = mMfUlTester.mAppId;
-                mTickAppIdUlt = map_AppId.get( mMfUlTester.mAppId);
+                    mMfUlTester.GetAppId();
+                    mTickAppIdUlt = map_AppId.get(mMfUlTester.mAppId);
 
-                mMfUlTester.GetTicketId();
-                //mTickIdUlt = mMfUlTester.mTickId;
-                mTickIdUlt = map_TicketId.get(mMfUlTester.mTickId);
+                    mMfUlTester.GetTicketId();
+                    mTickIdUlt = map_TicketId.get(mMfUlTester.mTickId);
 
-                mTickId = mMfUlTester.mTick;
-                tick = mMfUlTester.Tick;
-                ///////////////////////////////////////////////////
+                    mTickId = mMfUlTester.mTick;
+                    tick = mMfUlTester.Tick;
+                    ///////////////////////////////////////////////////
 
-                mMfUlTester.GetTicketNum();
-                mTickNum = mMfUlTester.mTickNum;
+                    mMfUlTester.GetTicketNum();
+                    mTickNum = mMfUlTester.mTickNum;
 
-                mMfUlTester.GetCardShelfLife();
-                mCardslife = mMfUlTester.mCardslife;
-                //////////////////////////////////////////////////////
-                //  Page 8
-                mMfUlTester.responseAPDU_32_47 = mnfcA.transceive(mMfUlTester.Bytes_32_47);
-                mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_32_47;
+                    mMfUlTester.GetCardShelfLife();
+                    mCardslife = mMfUlTester.mCardslife;
+                    //////////////////////////////////////////////////////
+                    //  Page 8
+                    mMfUlTester.responseAPDU_32_47 = mnfcA.transceive(mMfUlTester.Bytes_32_47);
+                    mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_32_47;
 
-                //  Page 9
-                mMfUlTester.responseAPDU_48_63 = mnfcA.transceive(mMfUlTester.Bytes_48_63);
-                mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_48_63;
+                    //  Page 9
+                    mMfUlTester.responseAPDU_48_63 = mnfcA.transceive(mMfUlTester.Bytes_48_63);
+                    mMfUlTester.responseAPDU = mMfUlTester.responseAPDU_48_63;
 
-                mMfUlTester.GetTicketIsDate();
-                mTickIsDateUlt = mMfUlTester.mTickIsDate;
+                    mMfUlTester.GetTicketIsDate();
+                    mTickIsDateUlt = mMfUlTester.mTickIsDate;
 
-                mMfUlTester.GetValPer();
-                mTickValPerUlt = mMfUlTester.mTickValPer;
+                    mMfUlTester.GetValPer();
+                    mTickValPerUlt = mMfUlTester.mTickValPer;
 
-                mMfUlTester.GetTicketRemFixedDays();
-                mCardRemFixedDays = mMfUlTester.mCardRemFixedDay;
-                ////////////////////////////////////////
+                    mMfUlTester.GetTicketRemFixedDays();
+                    mCardRemFixedDays = mMfUlTester.mCardRemFixedDay;
+                    ////////////////////////////////////////
 
-                mMfUlTester.GetTicketLastPass();
-                mTickLastPassUlt = mMfUlTester.mTickLastPass;
+                    mMfUlTester.GetTicketLastPass();
+                    mTickLastPassUlt = mMfUlTester.mTickLastPass;
 
-                mCardIntervalUlt = mMfUlTester.mCardInterval;
-                mCardLastTransferUlt = mMfUlTester.mCardLastTransfer;
-                mCardRemMinUlt90 = mMfUlTester.mCardRemMin90;
-                mCardRemMinUltSingle = mMfUlTester.mCardRemMinSingle;
+                    mCardIntervalUlt = mMfUlTester.mCardInterval;
+                    mCardLastTransferUlt = mMfUlTester.mCardLastTransfer;
+                    mCardRemMinUlt90 = mMfUlTester.mCardRemMin90;
+                    mCardRemMinUltSingle = mMfUlTester.mCardRemMinSingle;
 
-                mMfUlTester.GetTicketRemTrip();
-                mTickRemTripUlt = mMfUlTester.mTickRemTrip;
+                    mMfUlTester.GetTicketRemTrip();
+                    mTickRemTripUlt = mMfUlTester.mTickRemTrip;
 
-                mMfUlTester.GetTicketTransTypes();
-                //mTickTransTypeUlt =  mMfUlTester.mTickTransType;
-                mTickTransTypeUlt = map_TransType.get(mMfUlTester.mTickTransType);
+                    mMfUlTester.GetTicketTransTypes();
+                    mTickTransTypeUlt = map_TransType.get(mMfUlTester.mTickTransType);
 
-                mMfUlTester.GetTicketLastTurnstile();
-                mTickLastTurnUlt = mMfUlTester.mTickLastTurn;
+                    mMfUlTester.GetTicketLastTurnstile();
+                    mTickLastTurnUlt = mMfUlTester.mTickLastTurn;
 
-                ///////////////////////////////////////////////////
-                System.out.println("success connection");
+                    ///////////////////////////////////////////////////
+                    System.out.println("success connection");
+                }
+                catch (IOException e)
+                {
+                    Toast.makeText(this, "Не удается прочитать карту", Toast.LENGTH_SHORT).show();
+                }
             }
-            catch (IOException e)
+            if (mnfcA != null)
             {
-                Toast.makeText(this, "Не удается прочитать карту", Toast.LENGTH_SHORT).show();
+                try
+                {
+                    mnfcA.close();
+                }
+                catch (IOException e)
+                {
+                    Toast.makeText(this, "Не удается прочитать карту", Toast.LENGTH_SHORT).show();
+                }
             }
         }
-        if(mnfcA != null)
-        {
-            try
-            {
-                mnfcA.close();
-            }
-            catch (IOException e)
-            {
-                Toast.makeText(this, "Не удается прочитать карту", Toast.LENGTH_SHORT).show();
-            }
-        }
+        displayMifareUltralightData();
     }
 }
