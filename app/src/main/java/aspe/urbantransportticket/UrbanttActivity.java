@@ -427,11 +427,17 @@ public class UrbanttActivity extends AppCompatActivity
         mMfUlTester.Init();
         Utils.Tech();
         ////////////////////////////////////////////////
-        if (mType == "NFC_TAG_TYPE_2")
+        if(mType == "NFC_TAG_TYPE_2")
         {
             // read TAG ???
             Toast.makeText(this, "Не удается прочитать карту", Toast.LENGTH_SHORT).show();
             ////////////////////////////////////////////
+        }
+        else if(mType == "NFC_TAG_TYPE_4A")
+        {
+        // read TAG ???
+        Toast.makeText(this, "Не удается прочитать карту", Toast.LENGTH_SHORT).show();
+        ////////////////////////////////////////////
         }
         else
         {
